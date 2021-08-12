@@ -13,5 +13,5 @@ provider:
   linux_ppc64le: None
 
 github_actions:
-  upload_packages: False
+  upload_packages: True
   store_build_artifacts: True
