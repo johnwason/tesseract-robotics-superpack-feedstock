@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - CONFIG: linux_64_numpy1.17python3.8.____cpython
-            SHORT_CONFIG: linux_64_numpy1.17python3.8.____cpython
+          - CONFIG: linux_64_numpy1.18python3.8.____cpython
+            SHORT_CONFIG: linux_64_numpy1.18python3.8.____cpython
             UPLOAD_PACKAGES: False
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
             os: ubuntu
@@ -23,8 +23,8 @@ jobs:
             UPLOAD_PACKAGES: False
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
             os: ubuntu
-          - CONFIG: win_64_numpy1.17python3.8.____cpython
-            SHORT_CONFIG: win_64_numpy1.17python3.8.____cpython
+          - CONFIG: win_64_numpy1.18python3.8.____cpython
+            SHORT_CONFIG: win_64_numpy1.18python3.8.____cpython
             UPLOAD_PACKAGES: False
             os: windows
           - CONFIG: win_64_numpy1.19python3.9.____cpython
