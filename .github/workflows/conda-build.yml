@@ -93,6 +93,7 @@ jobs:
         CI: github_actions
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
+        CONDA_BLD_PATH: D:\bld\
       if: matrix.os == 'windows'
     - name: Prepare conda build artifacts
       id: prepare-artifacts
