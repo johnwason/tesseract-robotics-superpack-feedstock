@@ -106,6 +106,7 @@ requirements:
     - numpy
 
 build:
+  number: 1
   skip: true # [py<38]
 
 about:
