@@ -1,0 +1,42 @@
+diff --git a/tesseract_python/CMakeLists.txt b/tesseract_python/CMakeLists.txt
+index 9f664a7..4820a9d 100644
+--- a/tesseract_python/CMakeLists.txt
++++ b/tesseract_python/CMakeLists.txt
+@@ -179,15 +179,11 @@ if(SETUPTOOLS_DEB_LAYOUT)
+   set(SETUPTOOLS_ARG_EXTRA "--install-layout=deb")
+ endif()
+ 
+-if (${PYTHON_VERSION_MAJOR} LESS 3)
+-    install(CODE "message(STATUS \"Running setup.py in ${CMAKE_CURRENT_BINARY_DIR}/python\")
+-    execute_process(COMMAND python2 setup.py install -f
+---root=/ --prefix=${CMAKE_INSTALL_PREFIX} ${SETUPTOOLS_ARG_EXTRA} --single-version-externally-managed WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python)")
+-else()
+-  install(CODE "message(STATUS \"Running setup.py in ${CMAKE_CURRENT_BINARY_DIR}/python\")
+-  execute_process(COMMAND ${PYTHON_EXECUTABLE} setup.py install -f
+-  --root=/ --prefix=${CMAKE_INSTALL_PREFIX} ${SETUPTOOLS_ARG_EXTRA} --single-version-externally-managed WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python)")
+-endif()
++
++    install(CODE "message(STATUS \"Running pip setup in ${CMAKE_CURRENT_BINARY_DIR}/python\")
++    execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install --no-deps --ignore-installed
++  --target=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages . ${SETUPTOOLS_ARG_EXTRA} WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python COMMAND_ERROR_IS_FATAL ANY)")
++
+ 
+ 
+   # Allows Colcon to find non-Ament packages when using workspace underlays
+diff --git a/tesseract_viewer_python/CMakeLists.txt b/tesseract_viewer_python/CMakeLists.txt
+index 5f233f9..248cc76 100644
+--- a/tesseract_viewer_python/CMakeLists.txt
++++ b/tesseract_viewer_python/CMakeLists.txt
+@@ -43,9 +43,9 @@ if(SETUPTOOLS_DEB_LAYOUT)
+   set(SETUPTOOLS_ARG_EXTRA "--install-layout=deb")
+ endif()
+ 
+-install(CODE "message(STATUS \"Running setup.py in ${CMAKE_CURRENT_SOURCE_DIR}\")
+-execute_process(COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/setup.py install -f
+---root=/ --prefix=${CMAKE_INSTALL_PREFIX} ${SETUPTOOLS_ARG_EXTRA} --single-version-externally-managed WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})")
++install(CODE "message(STATUS \"Running pip setup in ${CMAKE_CURRENT_SOURCE_DIR}\")
++execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install --no-deps --ignore-installed
++--target=${CMAKE_INSTALL_PREFIX}/lib/python3/dist-packages . WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} COMMAND_ERROR_IS_FATAL ANY)")
+ 
+   # Allows Colcon to find non-Ament packages when using workspace underlays
+   file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/share/ament_index/resource_index/packages/${PROJECT_NAME} "")

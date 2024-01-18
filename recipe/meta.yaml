@@ -3,6 +3,7 @@
 {% set opw_kinematics_version = "0.5.0" %}
 {% set tesseract_version = "0.21.5" %}
 {% set tesseract_planning_version = "0.21.6" %}
+{% set tesseract_python_version = "0.4.0" %}
 {% set trajopt_version = "0.7.2" %}
 {% set descartes_light_version = "0.4.2" %}
 {% set ruckig_version = "0.12.2" %}
@@ -30,8 +31,10 @@ source:
     folder: src/ruckig
     patches:
       - ruckig-install-header-files.patch
-  - url: https://github.com/johnwason/tesseract_python-1/archive/refs/heads/update_dec_2023_1.tar.gz
+  - url: https://github.com/tesseract-robotics/tesseract_python/archive/refs/tags/{{ tesseract_python_version }}.tar.gz
     folder: src
+    patches:
+      - tesseract-python-pip-install.patch
 
 requirements:
   build:
@@ -110,7 +113,7 @@ test:
   requires:
     - pytest
   commands:
-    - run_test_tesseract_python.sh # [unix]
+    - ./run_test_tesseract_python.sh # [unix]
     - run_test_tesseract_python.bat # [win]
 
 build:
